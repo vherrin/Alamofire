@@ -105,7 +105,7 @@ open class SessionDelegate: NSObject {
 
     // MARK: URLSessionStreamDelegate Overrides
 
-#if !os(watchOS)
+#if !os(watchOS) && !os(Linux)
 
     /// Overrides default behavior for URLSessionStreamDelegate method `urlSession(_:readClosedFor:)`.
     open var streamTaskReadClosed: ((URLSession, URLSessionStreamTask) -> Void)?
@@ -165,7 +165,7 @@ open class SessionDelegate: NSObject {
             }
         #endif
 
-        #if !os(watchOS)
+        #if !os(watchOS) && !os(Linux)
             switch selector {
             case #selector(URLSessionStreamDelegate.urlSession(_:readClosedFor:)):
                 return streamTaskReadClosed != nil
@@ -374,7 +374,7 @@ extension SessionDelegate: URLSessionTaskDelegate {
         }
     }
 
-#if !os(watchOS)
+#if !os(watchOS) && !os(Linux)
 
     /// Tells the delegate that the session finished collecting metrics for the task.
     ///
